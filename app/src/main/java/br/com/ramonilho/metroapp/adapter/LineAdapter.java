@@ -1,6 +1,7 @@
 package br.com.ramonilho.metroapp.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.com.ramonilho.metroapp.R;
+import br.com.ramonilho.metroapp.api.APIUtils;
 import br.com.ramonilho.metroapp.model.Line;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +46,7 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.LineViewHolder
         holder.tvSubTitulo.setText(lines.get(position).getNumero());
 
         Picasso.with(holder.itemView.getContext())
-                .load(lines.get(position).getUrlImagem())
+                .load(APIUtils.BASE_URL+lines.get(position).getUrlImagem())
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
                 .into(holder.ivLogo);
