@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.com.ramonilho.metroapp.R;
+import br.com.ramonilho.metroapp.activity.OnItemClickListener;
 import br.com.ramonilho.metroapp.api.APIUtils;
 import br.com.ramonilho.metroapp.model.Line;
 import butterknife.BindView;
@@ -24,9 +25,11 @@ import butterknife.ButterKnife;
 
 public class LineAdapter extends RecyclerView.Adapter<LineAdapter.LineViewHolder> {
     private List<Line> lines;
+    private OnItemClickListener listener;
 
-    public LineAdapter(List<Line> lines) {
+    public LineAdapter(List<Line> lines, OnItemClickListener listener) {
         this.lines = lines;
+        this.listener = listener;
     }
 
     @Override
@@ -40,10 +43,17 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.LineViewHolder
     }
 
     @Override
-    public void onBindViewHolder(LineViewHolder holder, int position) {
+    public void onBindViewHolder(LineViewHolder holder, final int position) {
 
         holder.tvTitulo.setText(lines.get(position).getCor());
         holder.tvSubTitulo.setText(lines.get(position).getNumero());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(lines.get(position));
+            }
+        });
 
         Picasso.with(holder.itemView.getContext())
                 .load(APIUtils.BASE_URL+lines.get(position).getUrlImagem())

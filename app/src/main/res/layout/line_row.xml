@@ -18,6 +18,7 @@
             tools:src="@mipmap/ic_launcher"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
+            android:layout_marginTop="10dp"
             />
 
         <TextView

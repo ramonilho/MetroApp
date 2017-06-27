@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,12 @@ public class MainActivity extends AppCompatActivity {
 //        rvLines = (RecyclerView) findViewById(R.id.rvLines);
         ButterKnife.bind(this);
 
-        lineAdapter = new LineAdapter(new ArrayList<Line>());
+        lineAdapter = new LineAdapter(new ArrayList<Line>(), new OnItemClickListener() {
+            @Override
+            public void onItemClick(Line item) {
+                Toast.makeText(getApplicationContext(), item.getCor(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvLines.setLayoutManager(layoutManager);
